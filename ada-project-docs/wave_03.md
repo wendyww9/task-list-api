@@ -113,6 +113,10 @@ After I have made the `PATCH` request, I can submit a `GET` request to `/tasks/1
 }
 ```
 
+Notice the same dictionary structure for the Task data as in our wave 1 routes. We should be able to use any response model helper that we are using in other Task routes to help build this response.
+
+Also notice that fundamentally, this route requires that we look up a model by its ID, and then update that model. We should be able to reuse the same route helper methods that we have been using in other Task routes to help build this route.
+
 ### Mark Incomplete on an Incomplete Task
 
 Given a task that has:
@@ -143,6 +147,10 @@ After I have made the `PATCH` request, I can submit a `GET` request to `/tasks/1
 }
 ```
 
+Notice the same dictionary structure for the Task data as in our wave 1 routes. We should be able to use any response model helper that we are using in other Task routes to help build this response.
+
+Also notice that fundamentally, this route requires that we look up a model by its ID, and then update that model. We should be able to reuse the same route helper methods that we have been using in other Task routes to help build this route.
+
 ## Mark Complete and Mark Incomplete for Missing Tasks
 
 Given that there are no tasks with the ID `1`,
@@ -154,3 +162,5 @@ Then I get a `404 Not Found`.
 You may choose the response body.
 
 Make sure to complete the tests for non-existing tasks to check that the correct response body is returned.
+
+Notice that the behavior for a missing Task is consistent with invalid Task IDs in other Task routes. We should be able to use the same route helper methods that we have been using in other Task routes to help build this route.
