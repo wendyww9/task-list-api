@@ -23,7 +23,7 @@ The following are required routes for wave 3. Feel free to implement the routes 
 - SQL's value of `null` is similar to Python's value of `None`.
 - Python has a [datetime library](https://docs.python.org/3/library/datetime.html#module-datetime) which we recommend using to represent dates in model attributes.
 
-### Mark Complete on an Incompleted Task
+### Mark Complete on an Incomplete Task
 
 Given a task that has:
 
@@ -113,7 +113,7 @@ After I have made the `PATCH` request, I can submit a `GET` request to `/tasks/1
 }
 ```
 
-### Mark Incomplete on an Incompleted Task
+### Mark Incomplete on an Incomplete Task
 
 Given a task that has:
 
