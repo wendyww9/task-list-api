@@ -34,6 +34,12 @@ when I send a `PATCH` request to `/tasks/1/mark_complete`,
 
 then the task is updated, so that its `completed_at` value is the current date, and I get this response:
 
+`204 No Content`
+
+The response should have a mimetype of "application/json" to keep our API response type consistent.
+
+After I have made the `PATCH` request, I can submit a `GET` request to `/tasks/1`, which will return the response:
+
 `200 OK`
 
 ```json
@@ -57,6 +63,12 @@ Given a task that has:
 when I send a `PATCH` request to `/tasks/1/mark_incomplete`,
 
 then the task is updated, so that its `completed_at` value is `null`/`None`, and I get this response:
+
+`204 No Content`
+
+The response should have a mimetype of "application/json" to keep our API response type consistent.
+
+After I have made the `PATCH` request, I can submit a `GET` request to `/tasks/1`, which will return the response:
 
 `200 OK`
 
@@ -82,6 +94,12 @@ when I send a `PATCH` request to `/tasks/1/mark_complete`,
 
 then I want this to behave exactly like `/tasks/1/mark_complete` for an incomplete task. The task is updated, so that its `completed_at` value is the current date, and I get this response:
 
+`204 No Content`
+
+The response should have a mimetype of "application/json" to keep our API response type consistent.
+
+After I have made the `PATCH` request, I can submit a `GET` request to `/tasks/1`, which will return the response:
+
 `200 OK`
 
 ```json
@@ -105,6 +123,12 @@ Given a task that has:
 when I send a `PATCH` request to `/tasks/1/mark_incomplete`,
 
 then I want this to behave exactly like `/tasks/1/mark_incomplete` for a complete task. Its `completed_at` value remains as `null`/`None`, and I get this response:
+
+`204 No Content`
+
+The response should have a mimetype of "application/json" to keep our API response type consistent.
+
+After I have made the `PATCH` request, I can submit a `GET` request to `/tasks/1`, which will return the response:
 
 `200 OK`
 

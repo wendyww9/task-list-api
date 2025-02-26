@@ -125,28 +125,17 @@ As a client, I want to be able to make a `PUT` request to `/goals/1` when there 
 
 and get this response:
 
-`200 OK`
+`204 No Content`
 
-```json
-{
-  "goal": {
-    "id": 1,
-    "title": "Updated Goal Title"
-  }
-}
-```
+The response should have a mimetype of "application/json" to keep our API response type consistent.
 
 ### Delete Goal: Deleting a Goal
 
 As a client, I want to be able to make a `DELETE` request to `/goals/1` when there is at least one saved goal and get this response:
 
-`200 OK`
+`204 No Content`
 
-```json
-{
-  "details": "Goal 1 \"Build a habit of going outside daily\" successfully deleted"
-}
-```
+The response should have a mimetype of "application/json" to keep our API response type consistent.
 
 ### No matching Goal: Get, Update, and Delete
 

@@ -150,18 +150,9 @@ As a client, I want to be able to make a `PUT` request to `/tasks/1` when there 
 
 and get this response:
 
-`200 OK`
+`204 No Content`
 
-```json
-{
-  "task": {
-    "id": 1,
-    "title": "Updated Task Title",
-    "description": "Updated Test Description",
-    "is_complete": false
-  }
-}
-```
+The response should have a mimetype of "application/json" to keep our API response type consistent.
 
 Note that the update endpoint does update the `completed_at` attribute. This will be updated with custom endpoints implemented in Wave 3.
 
@@ -169,13 +160,9 @@ Note that the update endpoint does update the `completed_at` attribute. This wil
 
 As a client, I want to be able to make a `DELETE` request to `/tasks/1` when there is at least one saved task and get this response:
 
-`200 OK`
+`204 No Content`
 
-```json
-{
-  "details": "Task 1 \"Go on my daily walk 🏞\" successfully deleted"
-}
-```
+The response should have a mimetype of "application/json" to keep our API response type consistent.
 
 #### No Matching Task: Get, Update, and Delete
 
