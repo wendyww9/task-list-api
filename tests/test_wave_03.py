@@ -78,20 +78,12 @@ def test_mark_complete_on_completed_task(client, completed_task):
 def test_mark_incomplete_on_incomplete_task(client, one_task):
     # Act
     response = client.patch("/tasks/1/mark_incomplete")
-    response_body = response.get_json()
 
     # Assert
-    assert response.status_code == 200
-    assert response_body["task"]["is_complete"] == False
-    assert response_body == {
-        "task": {
-            "id": 1,
-            "title": "Go on my daily walk 🏞",
-            "description": "Notice something new every day",
-            "is_complete": False
-        }
-    }
-    assert Task.query.get(1).completed_at == None
+    assert response.status_code == 204
+
+    query = db.select(Task).where(Task.id == 1)
+    assert db.session.scalar(query).completed_at == None
 
 
 @pytest.mark.skip(reason="No way to test this feature yet")
