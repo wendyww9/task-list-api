@@ -28,31 +28,9 @@ How would you write tests for it? How would you implement it?
 
 Your decisions should not break the other tests.
 
-### Model Instance Methods
-
-We can define instance methods in our model classes.
-
-Consider places in your code that deal with one model at a time. Is there any repeated logic or behavior?
-
-Here are some ideas to start:
-
-- Create an instance method in `Task` named `to_dict()`
-    - Converts a `Task` instance into JSON
-    - Returns a Python dictionary in the shape of the JSON our API returns in the `GET` `/tasks` route
-- Create a class method in `Task` named `from_json()`
-    - Converts JSON into a new instance of `Task`
-    - Takes in a dictionary in the shape of the JSON our API receives in the create and update routes
-    - Returns an instance of `Task` 
-
 ### Use List Comprehensions
 
 Use list comprehensions in your route functions where applicable.
-
-### Route Helper Methods
-
-If you have not already refactored your route files to use helper methods, do so now!
-
-Consider code with complex or repetitive logic, and refactor it into helper methods. Watch your route files become cleaner and more readable!
 
 ### More Query Params
 
@@ -61,3 +39,5 @@ Create the tests and implementation so that the user may
 - filter tasks by title
 - sort tasks by id
 - sort goals by title
+
+Remember that Wave 2 already has a sorting feature for tasks by title, so we might practice creating another route helper method that can be used for sorting across multiple model types. Such a method could even be extended to perform the filtering as well!

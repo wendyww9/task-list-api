@@ -18,7 +18,7 @@ Secondly, we should create our new route, `/goals/<goal_id>/tasks`, so that our 
 
 - Use lesson materials and independent research to review how to set up a one-to-many relationship in Flask.
 - Remember to run `flask db migrate` and `flask db upgrade` whenever there is a change to the model.
-- Pay attention to the exact shape of the expected JSON. Double-check nested data structures and the names of the keys for any mispellings.
+- Pay attention to the exact shape of the expected JSON. Double-check nested data structures and the names of the keys for any misspellings.
 - Use the tests in `tests/test_wave_06.py` to guide your implementation.
 - Some tests use a fixture named `one_task_belongs_to_one_goal` that is defined in `tests/conftest.py`. This fixture saves a task and a goal to the test database, and uses SQLAlchemy to associate the goal and task together.
 
@@ -63,6 +63,8 @@ Then the three `Task`s belong to the `Goal` and it gets updated in the database,
 }
 ```
 
+We will need to validate that the Goal ID, as well as each Task ID exists in the database. A route helper method that can resolve a model instance from its ID would help us validate the IDs in the request body.
+
 ### Getting Tasks of One Goal
 
 Given a goal that has:
@@ -99,6 +101,10 @@ then I get this response:
   ]
 }
 ```
+
+Notice that if we have been using a model helper method to return a dictionary representation of a Task, we can use this method to help build this route response. However, we must notice that there is an additional key in the data for the Task models that are associated with the Goal. This doesn't necessarily mean that we should abandon the model helper method, but we may need to introduce logic to allow it to work in this context.
+
+This is also true of the Goal model helper method. We may need to introduce logic to allow it to work in this context, or use the existing method to generate the basic dictionary representation of the Goal and then add the additional data for the associated Task models.
 
 ### Getting Tasks of One Goal: No Matching Tasks
 
