@@ -36,6 +36,23 @@ Tasks should contain these attributes. **The tests require the following columns
 - We can assume that the value of each task's `completed_at` attribute will be `None`, until wave 3. (Read below for examples)
 - We can assume that the API will designate `is_complete` as `false`, until wave 3. (Read below for examples)
 
+## Model Helper Methods
+
+We have seen that we can define instance methods in our model classes. We should practice those skills here by including model helper methods that can:
+
+- Return a Python dictionary in the shape of the JSON our API expects to return for a model instance.
+- Create a new model instance from a dictionary, typically retrieved from the JSON sent as a request body.
+
+## Route Helper Methods
+
+Beyond model helper methods, we should also practice creating route helper methods. Especially in this wave, we should consider creating a route helper method that can:
+
+- Retrieve a model instance by its ID.
+
+We might also consider creating a route helper method that can:
+
+- Handle the creation of new instances of a model from a dictionary, returning the expected responses.
+
 ## CRUD for Tasks
 
 ### Tips
