@@ -12,7 +12,7 @@ Our goal is to integrate the Slack web API. When our API marks a task as "comple
 
 To complete this wave, follow these steps:
 
-1. Setup a Slack workspace
+1. Setup a Slack workspace or use the cohort work space.
 1. Create a Slackbot with the right permissions, and get a Slackbot API key
 1. Verify that your Slackbot works using the Slack Tester
 1. Verify that your Slackbot works using Postman
@@ -21,7 +21,7 @@ To complete this wave, follow these steps:
 
 ### Setup a Slack Workspace
 
-For this Task List API project, you will need an independent Slack workspace to use.
+If you are choosing to use the cohort workspace, you can skip this step. However, if you not or you run into any situation that prevents your from setting up your app you will need an independent Slack workspace to use.
 
 Create an independent Slack workspace. Follow classroom instructions to find out if these independent Slack workspaces are individual, in pairs, groups, classes, etc.
 
@@ -40,7 +40,9 @@ Ensure that you are able to log into Slack's API/Apps dashboard:
    - Sign into the workspace that you want the Slackbot to live in
    - You can always go back to the "Your apps" page using the button on the top right
 1. Make a new app by pressing the "Create an App" button
-   - The app name doesn't matter, but we recommend including your first name or an identifier in it, such as "Ada's Bot."
+   - The app name doesn't matter, but we recommend including your first name or an identifier in it, such as "Ada's Bot." 
+
+**Note: If you are using the cohort workspace, Slack may throttle the creation of application for the space. This is because multiple students could be making creating an app that same time. To circumvent this you could either try again at a later time or use your own independent workspace (refer to the "Setup a Slack Workspace" section above).**
 
 ![](assets/create_slackbot.png)
 
@@ -109,7 +111,8 @@ Now, visit https://api.slack.com/methods/chat.postMessage/test.
 Fill in the HTTP Request info to test this endpoint.
 
 - For `token`, paste in the Slackbot token you created earlier
-- For `channel`, type in `task-notifications` (or the name of a public, existing channel in your Slack workspace)
+- For `channel`, type in the name of either the name of a public, existing channel in your independent Slack workspace or API testing channel of the cohort workspace.
+  - **Please make sure that you are not sending a messages to any other public channels besides the API testing channel if you are using the cohort workspace.**
 - For `text`, type in a nice message for everyone to read, such as "Hello, World!"
 
 Press the "Test Method" button!
