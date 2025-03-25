@@ -42,7 +42,7 @@ Ensure that you are able to log into Slack's API/Apps dashboard:
 1. Make a new app by pressing the "Create an App" button
    - The app name doesn't matter, but we recommend including your first name or an identifier in it, such as "Ada's Bot." 
 
-**Note: If you are using the cohort workspace, Slack may throttle the creation of application for the space. This is because multiple students could be making creating an app that same time. To circumvent this you could either try again at a later time or use your own independent workspace (refer to the "Setup a Slack Workspace" section above).**
+**Note: If you are using the cohort workspace, Slack may throttle the creation of an application for the space. This is because multiple students could be creating an app at the same time. To circumvent this you could either try again at a later time or use your own independent workspace (refer to the "Setup a Slack Workspace" section above).**
 
 ![](assets/create_slackbot.png)
 
