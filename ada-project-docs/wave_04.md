@@ -111,7 +111,7 @@ Now, visit https://api.slack.com/methods/chat.postMessage/test.
 Fill in the HTTP Request info to test this endpoint.
 
 - For `token`, paste in the Slackbot token you created earlier
-- For `channel`, type in the name of either the name of a public, existing channel in your independent Slack workspace or API testing channel of the cohort workspace.
+- For `channel`, type in the name of either a public, existing channel in your independent Slack workspace or the API testing channel of the cohort workspace.
   - **Please make sure that you are not sending a messages to any other public channels besides the API testing channel if you are using the cohort workspace.**
 - For `text`, type in a nice message for everyone to read, such as "Hello, World!"
 
