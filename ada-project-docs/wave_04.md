@@ -21,7 +21,7 @@ To complete this wave, follow these steps:
 
 ### Setup a Slack Workspace
 
-If you are choosing to use the cohort workspace, you can skip this step. However, if you not or you run into any situation that prevents your from setting up your app you will need an independent Slack workspace to use.
+If you are choosing to use the cohort workspace, you can skip this step. However, if you are not or you run into any situation that prevents your from setting up your app you will need an independent Slack workspace to use.
 
 Create an independent Slack workspace. Follow classroom instructions to find out if these independent Slack workspaces are individual, in pairs, groups, classes, etc.
 
