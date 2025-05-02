@@ -23,15 +23,13 @@ def create_task():
 @tasks_bp.get("")
 def get_all_tasks():
     query = db.select(Task)
-    # description_param = request.args.get("description")
-    # if description_param:
-    #     query = query.where(Task.description.ilike(f"%{description_param}%"))
-        
-    # habitable_param = request.args.get("habitable")
-    # if habitable_param:
-    #     query = query.where(Taks.habitable.ilike(f"%{habitable_param}%"))
-        
-    query = query.order_by(Task.id)
+
+    sort_order = request.args.get("sort")
+    if sort_order == "asc":
+        query = query.order_by(Task.title.asc())
+    elif sort_order == "desc":
+        query = query.order_by(Task.title.desc())
+ 
     tasks = db.session.scalars(query)
 
     tasks_response = []
