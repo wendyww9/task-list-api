@@ -3,6 +3,9 @@ from app.models.task import Task
 from ..db import db
 from .route_utilities import validate_model
 from datetime import datetime
+import requests
+import json
+import os
 
 tasks_bp = Blueprint("tasks_bp", __name__, url_prefix="/tasks")
 
@@ -74,8 +77,27 @@ def update_one_task_complete(task_id):
     
     db.session.commit()
     db.session.commit()
+    call_slack_api(task.title)
 
     return Response(status=204, mimetype ="application/json")
+
+def call_slack_api(title):
+    url = "https://slack.com/api/chat.postMessage"
+
+    payload = json.dumps({
+    "channel": "test-slack-api",
+    "text": f"Someone just completed the task {title}"
+    })
+
+    headers = {
+    'Authorization': f"Bearer {os.environ.get('SLACK_Bot_User_OAuth_Token')}",
+    'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    return None
+
 
 @tasks_bp.patch("/<task_id>/mark_incomplete")
 def update_one_task_incomplete(task_id):
