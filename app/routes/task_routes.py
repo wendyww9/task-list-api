@@ -7,9 +7,9 @@ import requests
 import json
 import os
 
-tasks_bp = Blueprint("tasks_bp", __name__, url_prefix="/tasks")
+bp = Blueprint("tasks_bp", __name__, url_prefix="/tasks")
 
-@tasks_bp.post("")
+@bp.post("")
 def create_task():
     request_body = request.get_json()
     try:
@@ -24,7 +24,7 @@ def create_task():
 
     return {"task": new_task.to_dict()}, 201
 
-@tasks_bp.get("")
+@bp.get("")
 def get_all_tasks():
     query = db.select(Task)
 
@@ -42,14 +42,14 @@ def get_all_tasks():
     
     return tasks_response, 200
 
-@tasks_bp.get("/<task_id>")
+@bp.get("/<task_id>")
 def get_one_task(task_id):
     task = validate_model(Task, task_id)
     
     return {"task": task.to_dict()}
 
 
-@tasks_bp.put("/<task_id>")
+@bp.put("/<task_id>")
 def update_one_task(task_id):
     task = validate_model(Task, task_id)
     request_body = request.get_json()
@@ -61,7 +61,7 @@ def update_one_task(task_id):
 
     return Response(status=204, mimetype ="application/json")
 
-@tasks_bp.delete("/<task_id>")
+@bp.delete("/<task_id>")
 def delete_one_task(task_id):
     task = validate_model(Task, task_id)
 
@@ -70,7 +70,7 @@ def delete_one_task(task_id):
 
     return Response(status=204, mimetype ="application/json")
     
-@tasks_bp.patch("/<task_id>/mark_complete")
+@bp.patch("/<task_id>/mark_complete")
 def update_one_task_complete(task_id):
     task = validate_model(Task, task_id)
     task.completed_at = datetime.now()
@@ -99,7 +99,7 @@ def call_slack_api(title):
     return None
 
 
-@tasks_bp.patch("/<task_id>/mark_incomplete")
+@bp.patch("/<task_id>/mark_incomplete")
 def update_one_task_incomplete(task_id):
     task = validate_model(Task, task_id)
     task.completed_at = None
