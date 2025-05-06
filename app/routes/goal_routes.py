@@ -21,8 +21,6 @@ def create_task_with_goal_id(goal_id):
     request_body = request.get_json()
     
     task_ids = request_body.get("task_ids")
-    if not isinstance(task_ids, list):
-        abort(make_response({"details": "Invalid data: 'task_ids' must be a list"}, 400))
 
     for task in goal.tasks:
         task.goal_id = None
