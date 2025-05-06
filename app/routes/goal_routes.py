@@ -1,7 +1,8 @@
 from flask import Blueprint, abort, make_response, Response, request
 from ..db import db
 from app.models.goal import Goal
-from .route_utilities import validate_model
+from app.models.task import Task
+from .route_utilities import validate_model, create_model
 import requests
 import json
 import os
@@ -11,16 +12,33 @@ bp = Blueprint("goals_bp",__name__,url_prefix="/goals")
 @bp.post("")
 def create_goal():
     request_body = request.get_json()
-    try:
-        new_goal = Goal.from_dict(request_body)
-    except KeyError as e:
-        response = {"details": "Invalid data"}
-        abort(make_response(response, 400))
+    data, status_code = create_model(Goal, request_body)
+    return {"goal": data}, status_code
 
-    db.session.add(new_goal)
+@bp.post("/<goal_id>/tasks")
+def create_task_with_goal_id(goal_id):
+    goal = validate_model(Goal, goal_id)
+    request_body = request.get_json()
+    
+    task_ids = request_body.get("task_ids")
+    if not isinstance(task_ids, list):
+        abort(make_response({"details": "Invalid data: 'task_ids' must be a list"}, 400))
+
+    for task in goal.tasks:
+        task.goal_id = None
+    
+    tasks = []
+    for task_id in task_ids:
+        task = validate_model(Task, task_id)
+        task.goal_id = goal.id
+        tasks.append(task)
+
     db.session.commit()
 
-    return {"goal":new_goal.to_dict()}, 201
+    return {
+        "id": goal.id,
+        "task_ids": [task.id for task in tasks]
+    }, 200
 
 @bp.get("")
 def get_all_goals():
@@ -33,11 +51,23 @@ def get_all_goals():
     
     return goals_response, 200
 
+
 @bp.get("/<goal_id>")
 def get_one_goal(goal_id):
     goal = validate_model(Goal, goal_id)
     
     return {"goal": goal.to_dict()}
+
+@bp.get("/<goal_id>/tasks")
+def get_all_goal_tasks(goal_id):
+    goal = validate_model(Goal, goal_id)
+    tasks = [task.to_dict() for task in goal.tasks]
+
+    return {
+        "id": goal.id,
+        "title": goal.title,
+        "tasks": tasks
+    }, 200
 
 
 @bp.put("/<goal_id>")
