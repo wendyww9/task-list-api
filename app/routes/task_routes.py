@@ -25,7 +25,7 @@ def get_all_tasks():
         query = query.order_by(Task.title.asc())
     elif sort_order == "desc":
         query = query.order_by(Task.title.desc())
- 
+
     tasks = db.session.scalars(query)
 
     tasks_response = []
