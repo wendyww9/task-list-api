@@ -3,11 +3,12 @@ from ..db import db
 from datetime import datetime
 from typing import Optional
 from sqlalchemy import ForeignKey
+
 class Task(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     title: Mapped[str]
     description: Mapped[str]
-    completed_at: Mapped[datetime | None] = mapped_column(default=None, nullable=True)
+    completed_at: Mapped[Optional[datetime]]
     goal_id: Mapped[Optional[int]] = mapped_column(ForeignKey("goal.id"))
     goal: Mapped[Optional["Goal"]] = relationship(back_populates="tasks")
 
@@ -27,11 +28,11 @@ class Task(db.Model):
     
     @classmethod
     def from_dict(cls, task_data):
-        completed_at = task_data.get("completed_at", None)
+
         return cls(
             title=task_data["title"],
             description=task_data["description"],
-            completed_at=completed_at,
+            completed_at = task_data.get("completed_at", None),
             goal_id=task_data.get("goal_id", None)
         )
         

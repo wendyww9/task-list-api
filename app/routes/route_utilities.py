@@ -17,27 +17,19 @@ def validate_model(cls, model_id):
 
     return model
 
+
 def create_model(cls, model_data):
     try:
         new_model = cls.from_dict(model_data)
-    except KeyError as e:
+    except KeyError:
         response = {"details": "Invalid data"}
         abort(make_response(response, 400))
 
     db.session.add(new_model)
     db.session.commit()
 
-    return new_model.to_dict(), 201
+    return new_model
 
-# def get_models_with_filters(cls, filters=None):
-#     query = db.select(cls)
-
-#     if filters:
-#         for attribute, value in filters.items():
-#             if hasattr(cls, attribute):
-#                 query = query.where(getattr(cls, attribute).ilike(f"%{value}%"))
-    
-#     models = db.session.scalars(query.order_by(cls.id))
-#     models_response = [model.to_dict() for model in models]
-
-#     return models_response
+def create_model_response(cls, model_data, wrapper_key: str):
+    new_model = create_model(cls, model_data)
+    return {wrapper_key: new_model.to_dict()}, 201

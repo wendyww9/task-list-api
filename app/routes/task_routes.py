@@ -1,7 +1,7 @@
-from flask import Blueprint, request, Response, abort, make_response
+from flask import Blueprint, request, Response
 from app.models.task import Task
 from ..db import db
-from .route_utilities import validate_model, create_model
+from .route_utilities import validate_model, create_model_response
 from datetime import datetime
 import requests
 import json
@@ -12,9 +12,8 @@ bp = Blueprint("tasks_bp", __name__, url_prefix="/tasks")
 @bp.post("")
 def create_task():
     request_body = request.get_json()
-    data, status_code = create_model(Task, request_body)
+    return create_model_response(Task, request_body, "task")
 
-    return {"task": data}, status_code
 
 @bp.get("")
 def get_all_tasks():
@@ -32,7 +31,8 @@ def get_all_tasks():
     for task in tasks:
         tasks_response.append(task.to_dict())
     
-    return tasks_response, 200
+    return tasks_response
+
 
 @bp.get("/<task_id>")
 def get_one_task(task_id):
@@ -49,9 +49,9 @@ def update_one_task(task_id):
     task.description = request_body['description']
     
     db.session.commit()
-    db.session.commit()
 
     return Response(status=204, mimetype ="application/json")
+
 
 @bp.delete("/<task_id>")
 def delete_one_task(task_id):
@@ -61,13 +61,13 @@ def delete_one_task(task_id):
     db.session.commit()
 
     return Response(status=204, mimetype ="application/json")
-    
+
+
 @bp.patch("/<task_id>/mark_complete")
 def update_one_task_complete(task_id):
     task = validate_model(Task, task_id)
     task.completed_at = datetime.now()
     
-    db.session.commit()
     db.session.commit()
     call_slack_api(task.title)
 
@@ -86,7 +86,7 @@ def call_slack_api(title):
     'Content-Type': 'application/json'
     }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
+    requests.request("POST", url, headers=headers, data=payload)
 
     return None
 
@@ -96,7 +96,6 @@ def update_one_task_incomplete(task_id):
     task = validate_model(Task, task_id)
     task.completed_at = None
     
-    db.session.commit()
     db.session.commit()
 
     return Response(status=204, mimetype ="application/json")  
