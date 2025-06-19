@@ -69,7 +69,7 @@ def update_one_task_complete(task_id):
     task.completed_at = datetime.now()
     
     db.session.commit()
-    call_slack_api(task.title)
+    #call_slack_api(task.title)
 
     return Response(status=204, mimetype ="application/json")
 
